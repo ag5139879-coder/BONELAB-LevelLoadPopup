@@ -10,54 +10,34 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <!--
-    Set the environment variable BONELAB_DIR to your BONELAB install folder
-    (the folder that contains BONELAB.exe), with NO trailing slash.
-
-    Example:
-    C:\Program Files (x86)\Steam\steamapps\common\BONELAB
-  -->
-
   <ItemGroup>
-    <!-- MelonLoader (net8) -->
+    <!-- Local references (uploaded to the repo root) -->
     <Reference Include="MelonLoader">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\net8\MelonLoader.dll</HintPath>
+      <HintPath>MelonLoader.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\net8\0Harmony.dll</HintPath>
+      <HintPath>0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Il2CppInterop.Runtime">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\net8\Il2CppInterop.Runtime.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Il2CppInterop.Common">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\net8\Il2CppInterop.Common.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-
-    <!-- BoneLib -->
     <Reference Include="BoneLib">
-      <HintPath>$(BONELAB_DIR)\Mods\BoneLib.dll</HintPath>
+      <HintPath>BoneLib.dll</HintPath>
       <Private>false</Private>
     </Reference>
-
-    <!-- Game / Il2Cpp assemblies -->
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+      <HintPath>Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppSLZ.Marrow">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSLZ.Marrow.dll</HintPath>
+      <HintPath>Il2CppSLZ.Marrow.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>Il2Cppmscorlib.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
-      <HintPath>$(BONELAB_DIR)\MelonLoader\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+      <HintPath>Il2CppSystem.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

@@ -35,6 +35,11 @@ bld/
 **/[Pp]ackages/*
 !**/[Pp]ackages/build/
 
-# MelonLoader / game specific
-*.dll
-!libs/*.dll
+# Keep the reference DLLs we uploaded
+!MelonLoader.dll
+!0Harmony.dll
+!BoneLib.dll
+!Assembly-CSharp.dll
+!Il2CppSLZ.Marrow.dll
+!Il2Cppmscorlib.dll
+!Il2CppSystem.dll
