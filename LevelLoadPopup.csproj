@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>LevelLoadPopup</AssemblyName>
+    <RootNamespace>LevelLoadPopup</RootNamespace>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!--
+    Add your local references here or via a Directory.Build.props / NuGet.
+    Typical references needed:
+
+    - MelonLoader.dll
+    - 0Harmony.dll (usually comes with MelonLoader)
+    - BoneLib.dll
+    - Il2Cpp assemblies from BONELAB (Assembly-CSharp, Il2CppSLZ.*, etc.)
+  -->
+
+  <ItemGroup>
+    <!-- Example (uncomment and fix paths to your install):
+    <Reference Include="MelonLoader">
+      <HintPath>C:\Path\To\BONELAB\MelonLoader\net6\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="BoneLib">
+      <HintPath>C:\Path\To\BONELAB\Mods\BoneLib.dll</HintPath>
+    </Reference>
+    -->
+  </ItemGroup>
+
+</Project>
