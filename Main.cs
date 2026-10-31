@@ -1,6 +1,6 @@
 using MelonLoader;
 using BoneLib;
-using UnityEngine;
+using BoneLib.Notifications;
 using System;
 
 [assembly: MelonInfo(typeof(LevelLoadPopup.Main), "Level Load Popup", "1.0.0", "ag5139879-coder")]
@@ -12,55 +12,51 @@ namespace LevelLoadPopup
     {
         public override void OnInitializeMelon()
         {
-            // Hook the level loading events provided by BoneLib
-            Hooking.OnLevelLoading += OnLevelLoading;
-            Hooking.OnLevelLoaded += OnLevelLoaded;
-
-            LoggerInstance.Msg("Level Load Popup loaded! Waiting for level transitions...");
+            try
+            {
+                Hooking.OnLevelLoading += OnLevelLoading;
+                Hooking.OnLevelLoaded += OnLevelLoaded;
+                LoggerInstance.Msg("Level Load Popup loaded!");
+            }
+            catch (Exception ex)
+            {
+                LoggerInstance.Error("Failed to hook level events: " + ex);
+            }
         }
 
         private void OnLevelLoading(LevelInfo info)
         {
             try
             {
-                if (info == null)
-                {
-                    LoggerInstance.Warning("OnLevelLoading received null LevelInfo");
-                    return;
-                }
-
                 string title = GetLevelTitle(info);
 
-                // Simple, reliable popup using BoneLib notifications
-                // This works well in VR and is a good first step toward the full Patch 1 style UI
-                BoneLib.Notifications.Notifier.Send(new BoneLib.Notifications.Notification
+                Notifier.Send(new Notification
                 {
                     Title = "Loading Level",
                     Message = title,
-                    Type = BoneLib.Notifications.NotificationType.Info,
+                    Type = NotificationType.Information,
                     PopupLength = 5f,
                     ShowTitleOnPopup = true
                 });
 
-                LoggerInstance.Msg($"Showing load popup for: {title}");
+                LoggerInstance.Msg("Showing load popup for: " + title);
             }
             catch (Exception ex)
             {
-                LoggerInstance.Error($"Error in OnLevelLoading: {ex}");
+                LoggerInstance.Error("Error in OnLevelLoading: " + ex);
             }
         }
 
         private void OnLevelLoaded(LevelInfo info)
         {
-            // Optional: clean up any custom UI here once the level is fully ready
-            // For the notification version we don't need to do anything
+            // Nothing needed for the simple notification version
         }
 
         private string GetLevelTitle(LevelInfo info)
         {
             try
             {
-                // Prefer the nice display title from the crate
+                // Try the nice display title first
                 if (info.levelReference != null && info.levelReference.Crate != null)
                 {
                     string crateTitle = info.levelReference.Crate.Title;
@@ -68,7 +64,7 @@ namespace LevelLoadPopup
                         return crateTitle;
                 }
 
-                // Fallback to barcode if title is missing
+                // Fallback to barcode
                 if (!string.IsNullOrEmpty(info.barcode))
                     return info.barcode;
 
@@ -76,7 +72,7 @@ namespace LevelLoadPopup
             }
             catch
             {
-                return info?.barcode ?? "Unknown Level";
+                return "Unknown Level";
             }
         }
     }
