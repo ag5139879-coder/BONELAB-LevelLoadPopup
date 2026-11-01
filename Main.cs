@@ -1,10 +1,9 @@
 using MelonLoader;
 using BoneLib;
 using BoneLib.Notifications;
-using UnityEngine;
 using System;
 
-[assembly: MelonInfo(typeof(LevelLoadPopup.Main), "Level Load Popup", "1.3.0", "ag5139879-coder")]
+[assembly: MelonInfo(typeof(LevelLoadPopup.Main), "Level Load Popup", "1.4.0", "ag5139879-coder")]
 [assembly: MelonGame("Stress Level Zero", "BONELAB")]
 
 namespace LevelLoadPopup
@@ -13,7 +12,7 @@ namespace LevelLoadPopup
     {
         public override void OnInitializeMelon()
         {
-            LoggerInstance.Msg("Level Load Popup v1.3.0 initializing...");
+            LoggerInstance.Msg("Level Load Popup v1.4.0 initializing...");
 
             try
             {
@@ -31,27 +30,12 @@ namespace LevelLoadPopup
 
         private void OnLevelLoading(LevelInfo info)
         {
+            // This event often does not fire on Quest - kept for logging only
             try
             {
-                string title = GetLevelTitle(info);
-                LoggerInstance.Msg("[Loading] " + title);
-
-                // Strong notification - this is the reliable part
-                Notifier.Send(new Notification
-                {
-                    Title = "LOADING",
-                    Message = title,
-                    Type = NotificationType.Information,
-                    PopupLength = 7f,
-                    ShowTitleOnPopup = true
-                });
-
-                LoggerInstance.Msg("Notification sent for: " + title);
+                LoggerInstance.Msg("[Loading] " + GetLevelTitle(info));
             }
-            catch (Exception ex)
-            {
-                LoggerInstance.Error("OnLevelLoading error: " + ex);
-            }
+            catch { }
         }
 
         private void OnLevelLoaded(LevelInfo info)
@@ -60,6 +44,17 @@ namespace LevelLoadPopup
             {
                 string title = GetLevelTitle(info);
                 LoggerInstance.Msg("[Loaded] " + title);
+
+                Notifier.Send(new Notification
+                {
+                    Title = "LEVEL LOADED",
+                    Message = title,
+                    Type = NotificationType.Information,
+                    PopupLength = 6f,
+                    ShowTitleOnPopup = true
+                });
+
+                LoggerInstance.Msg("Notification sent for: " + title);
             }
             catch (Exception ex)
             {
@@ -71,7 +66,6 @@ namespace LevelLoadPopup
         {
             try
             {
-                // Prefer the title field if BoneLib fills it
                 if (!string.IsNullOrEmpty(info.title))
                     return info.title;
 
